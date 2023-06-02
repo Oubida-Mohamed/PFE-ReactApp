@@ -1,0 +1,46 @@
+.MuiPaper-root{
+    @apply hidden md:flex !important
+}
+.MuiStepIcon-root.MuiStepIcon-active,path{
+    @apply text-[#41d049] !important
+}
+.MuiStepConnector-alternativeLabel {
+    @apply top-5 !important
+}
+.MuiSvgIcon-root {
+    @apply w-7 h-7 !important
+}
+/* .steper{
+    @apply bg-[#e2f6dd] !important
+} */
+.MuiStepLabel-label.MuiStepLabel-active,.MuiStepLabel-label.MuiStepLabel-completed  {
+    @apply text-[#0fb127] !important;
+    @apply  font-bold !important
+}
+.MuiStepIcon-text{
+    @apply text-[13px] !important;
+    @apply  font-semibold !important
+
+}
+.MuiStepIcon-root {
+    color: rgb(155 155 155 / 36%) !important;
+}
+.MuiStepper-horizontal {
+    @apply lg:mx-[4%] xl:mx-[12%] max-[981px]:mx-[3%] md:mx-[1%] !important;
+}
+.MuiStepper-root{
+    @apply p-[12px] !important;
+}
+.progressbar{
+    @apply lg:mx-[4%] xl:mx-[12%] max-[981px]:mx-[3%] md:mx-[1%] xl:w-[70%] min-[1280px]:w-[80%] lg:w-[90%] md:w-[95%] h-[7px];
+    @apply  bg-white mt-10 mx-auto rounded-xl ;
+}
+.progressbar div{
+    @apply  w-[33.3%] h-[100%] bg-green-500 rounded-xl;
+    @apply transition duration-150 ease-in-out 
+}
+.photo{
+    background-image: url("../../public/images/professionel.png");
+    background-size: cover;
+    background-position: center center;
+}

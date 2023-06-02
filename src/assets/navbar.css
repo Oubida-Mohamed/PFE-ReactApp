@@ -1,0 +1,57 @@
+.nav{
+    @apply w-full top-0 left-0 fixed z-10  border-b-2 md:border-none;
+}
+.nav_content{
+    @apply h-24 flex items-center justify-between max-md:bg-white lg:px-[12%] md:px-[5%]  
+}
+.partie1_nav{
+    @apply md:flex w-[100%]
+}
+.div_logo{
+    @apply md:w-[30%] xl:w-[20%] flex
+}
+.div_logo>a{
+    @apply inline-block md:w-[100%] w-[200px] mx-auto
+
+}
+.div_logo>a>img{
+    @apply md:h-[120px] h-[100px] ml-[10%] md:mt-1 mt-4 duration-75
+}
+.div_search{
+   @apply  md:py-10 md:pl-5 lg:pl-16 w-[50%] md:w-3/4
+}
+/* .div_search input{
+} */
+.partie2_nav{
+    @apply flex md:w-[46%] lg:w-[35%] w-[10%] 
+}
+.ul{
+    @apply md:flex md:items-center md:pb-0 pb-12 absolute md:static  w-full
+                left-0 md:w-auto max-md:pl-0  transition-all duration-200 ease-in
+}
+.responsive_lien{
+    @apply max-md:w-56 max-md:bg-[#00B3FF] max-md:mt-[4.5rem] max-md:pt-14 z-10 max-md:h-screen duration-500
+}
+.slider_resp_nav{
+    @apply text-4xl absolute left-3 top-[2rem] md:hidden  cursor-pointer
+}
+.li_resp{
+    @apply max-md:w-52 max-md:px-5  hover:max-md:bg-white  max-md:py-3 hover:max-md:text-[#62646a] max-md:font-semibold text-white max-md:cursor-pointer;
+
+}
+.div_signin{
+    @apply flex md:items-center max-md:absolute right-3 top-[2rem] cursor-pointer
+}
+.signin{
+    @apply md:ml-5 ml-3 px-3 py-1 rounded-md hover:text-gray-400 duration-500 whitespace-nowrap 
+}
+.afficher{
+    @apply md:visible duration-500;
+}
+.cacher{
+    @apply md:hidden duration-500;
+}
+
+.ul_categories{
+    @apply flex md:pb-0 md:static overflow-hidden left-0 md:w-auto max-md:pl-0  transition-all duration-200 ease-in
+}

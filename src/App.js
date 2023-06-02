@@ -1,25 +1,14 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Page_visiteur from './components/page_visiteur/page-visiteur';
+import Page_dv_Vendeur from './components/page_devenir_vendeur/page_dv_vendeur';
+export default function App() {
+  
+  return (< >
+        {/* <Page_visiteur/> */}
+        <Page_dv_Vendeur/>
+    </>
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+     
+  )
+};
