@@ -5,6 +5,8 @@ import DropDownTime from "./page_components/DropDownTime";
 import ToggleButton from "./page_components/ToggleButton";
 import Pagination from './page_components/pagination';
 import { useState ,useEffect } from 'react';
+import Navbar from "../Navbar/Navbar";
+import Footer from "../page_visiteur/footer";
 
 
 function PageServices() {
@@ -23,7 +25,9 @@ function PageServices() {
     setButtonChecked(state);
   }
 
-  return <div className="container mx-auto mt-10">
+  return <div>
+    <Navbar/>
+  <div className="container mx-auto mt-[150px]">
     {/* Description */}
     <div className="mx-5 space-y-[10px]">
       <div className="flex space-x-[20px]">
@@ -39,10 +43,10 @@ function PageServices() {
     {/* Filter */}
     <div className=" mt-10 md:flex">
       <div className=" flex">
-        <div className="mx-[20px] z-10">
+        <div className="mx-[20px] sm:mx-[30px] z-[5px]">
           <DropDownPrice/>
         </div>
-        <div className="mx-[160px] z-10">
+        <div className="mx-[160px] z-[5px]">
           <DropDownTime/>
         </div>
       </div>
@@ -60,7 +64,8 @@ function PageServices() {
     <Pagination totalPages={nbrPages} onPageChange={handlePageChange} currentPage={currentPage} />
   </div>
 </div>
-
+<Footer/>
+</div>
 }
 
 export default PageServices;
