@@ -3,9 +3,8 @@ import App from '../../App'
 export const multiStepContext=React.createContext()
 export default function StepContext(){
     const [step,setstep]=useState(1);
-    const [vendData,setvendData]=useState({personnel_info:{fullname:"",description:"",picture:""},profesionel_info:{},
-        profesonel_info:{skills:[],education:[{contry:"",universirty:"",title:"",speciality:"",year:""}]},
-        certification:[{titre:"",year:""}]
+    const [vendData,setvendData]=useState({personnel_info:{fullname:"",description:"",picture:""},
+        profesonel_info:{skills:[],education:[],certification:[]}
     });
     const [finalData,setfinalData]=useState([]);
     return(
