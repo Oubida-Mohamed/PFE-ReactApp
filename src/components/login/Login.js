@@ -16,19 +16,23 @@ const Login=(props)=>{
     },[props.isOpen]);
     const closeModal = () => {
         props.setOpen(false);
+        setcreate(props.log);
     };
+    useEffect(()=>{
+        setcreate(props.log);
+    },[props.log]);
     
     return <div>
         
     
-        <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-black/75 py-20" >
+        <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-black/75 py-[110px]" >
         <div className="flex justify-center animate__animated animate__zoomIn">
         <div className="min-[870px]:flex hidden w-[400px] h-[550px]">
             <img src="images/login1.jpg" alt="login" className="w-full h-full rounded-l-lg"/>
         </div>
         <div className="min-[550px]:w-[450px] w-full h-[550px] min-[870px]:rounded-r-lg max-[870px]:rounded-lg bg-white">
-            <button onClick={closeModal} className='text-black'>
-            <img src='images/croix.png' alt='coix icons' className='w-5 h-5 ml-[420px] mt-[5px]'/>
+            <button onClick={closeModal} className='w-5 h-5 ml-[420px] mt-[5px]'>
+                <img src='images/croix.png' alt='coix icons' className='w-full h-full'/>
             </button>
             <form className="">
             <h1 className="mx-[50px] text-2xl font-bold">{!create?Tab_SignIn[0]:Tab_Join[0]}</h1>

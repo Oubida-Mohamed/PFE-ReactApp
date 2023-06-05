@@ -41,8 +41,15 @@ export default function Navbar(props){
       })
 
       const [isModalOpen, setIsModalOpen] = useState(false);
-      const openModal = () => {
+      const [create, setcreate] = useState(false);
+
+      const openModalCreate = () => {
         setIsModalOpen(true);
+        setcreate(true);
+      };
+      const openModalLogin = () => {
+        setIsModalOpen(true);
+        setcreate(false);
       };
       const closeModal = () => {
         setIsModalOpen(false);
@@ -91,17 +98,17 @@ export default function Navbar(props){
                     }
                      <li className={`md:ml-5 md:my-0 my-2 w-fit md:text-[17px] text-md 
                           ${open ?'li_resp' : 'max-md:hidden'}`}>
-                          <a onClick={openModal} className={`${!afficher_effet ?"md:text-[#62646a] cursor-pointer":scrolly>80?"md:text-[#62646a]":"md:text-white"} hover:md:text-gray-400 duration-500 whitespace-nowrap cursor-pointer`}>
-                          Sign in</a><Login isOpen={isModalOpen} setOpen={closeModal} log={false}/>
+                          <a onClick={openModalLogin} className={`${!afficher_effet ?"md:text-[#62646a] cursor-pointer":scrolly>80?"md:text-[#62646a]":"md:text-white"} hover:md:text-gray-400 duration-500 whitespace-nowrap cursor-pointer`}>
+                          Sign in</a><Login isOpen={isModalOpen} setOpen={closeModal} log={create}/>
                       </li>
                 </ul> 
             </div>
             {/* login et creation compte */}
             <div className='div_signin' >
-                <a onClick={openModal} className={`signin text-md bg-black text-white ${!afficher_effet ?"md:bg-black md:text-white":scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
-                  Sign up
+                <a onClick={openModalCreate} className={`signin text-md bg-black text-white ${!afficher_effet ?"md:bg-black md:text-white":scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
+                  Join
                 </a>
-                <Login isOpen={isModalOpen} setOpen={closeModal} log={true}/>
+                <Login isOpen={isModalOpen} setOpen={closeModal} log={create}/>
             </div>
         </div>
       </div>
