@@ -59,10 +59,11 @@ export default function Personal_info(){
                 {/* profile picture */}
                 <tr className='min-[650px]:flex block  md:mb-10 mb-5'><td className='block md:mr-[10%] lg:mr-[20%] xl:mr-[28%] text-lg md:text-xl md:font-semibold text-gray-600 md:mb-0 mb-1'>Profil Picture<span className='text-red-500'>*</span>
                 {/* <p className='text-[#969696] text-[10px]  mt-3 '>Add a profile picture of yourself so customers <br/> will know exactly who they’ll be working with..</p>*/}</td> 
-                    <td><div className="flex items-center justify-center w-full ">
-                        <label className="flex flex-col items-center justify-center w-[150px] h-[9rem] border-gray-300   rounded-[60%] cursor-pointer
-                            bg-gray-50 dark:hover:bg-bray-800  hover:bg-gray-200 dark:border-gray-600  photo">
+                    <td><div className="flex items-center justify-center w-full group hover:-translate-x-1 duration-300  delay-150 transition ease-in-out  ">
+                        <label className="flex flex-col items-center justify-center w-[130px] h-[8rem] border-gray-300 rounded-[60%] cursor-pointer
+                            bg-gray-50 dark:hover:bg-bray-800  hover:bg-gray-300 dark:border-gray-600  photo">
                             <input id="dropzone-file" type="file" className="hidden"  onChange={(e)=>{setpicture(e.target.value)}}/>
+                            <img src='./images/camera.png' className='invisible group-hover:visible   w-5 h-5'/>
                         </label>
                     </div></td>
                 </tr>

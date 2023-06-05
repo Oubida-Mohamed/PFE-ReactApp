@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../assets/navbar.css"
 import { Links2 } from '../../data';
 // Import Swiper React components
@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 // import required modules
 import { EffectFlip, Pagination, Navigation } from "swiper";
 
-export default function Navbar(){
+export default function Navbar(props){
   let Links = [
       { name: "Home", link: "/" },
       { name: "Become a Seller", link: "/seller" },
@@ -20,18 +20,32 @@ export default function Navbar(){
 
       let [scrolly, setscrolly] = useState();
       window.addEventListener('scroll',()=>{setscrolly(window.scrollY)})
-  let [open, setOpen] = useState(false);
-  let [search, setsearch] = useState("");
-  const [heading, setHeading] = useState("");
-  console.log(open)
+      let [open, setOpen] = useState(false);
+      let [search, setsearch] = useState("");
+      const [heading, setHeading] = useState("");
+      const [afficher_effet,setafficher_effet]=useState()
+      // const [nbr_afiche_lien_nav,setnbr_afiche_lien_nav]=useState()
+      // const [nbr_afiche_categoris,setnbr_afiche_categoris]=useState()
+      useEffect(()=>{
+        if(props.afiche){
+          setafficher_effet(true)
+          // setnbr_afiche_lien_nav(80)
+          // setnbr_afiche_categoris(130)
+        }else{
+          setafficher_effet(false)
+          // setnbr_afiche_lien_nav(-100)
+          // setnbr_afiche_categoris(-100)
+          // setscrolly(0)
+        }
+      })
   return(
     <div className={`nav relative`} >
-      <div className={`nav_content ${scrolly>80?"md:bg-white":""}`}>
+      <div className={`nav_content ${!afficher_effet ?"md:bg-white":scrolly>80?"md:bg-white":""}`}>
         <div className='partie1_nav'>
             {/* logo */}
           <div className='div_logo'>
                   <a href='/'>
-                      <img src={`${scrolly>80 | window.innerWidth<=786?"./images/Bdarija2.png":"./images/bdbll.png"}`}/>
+                      <img src={`${!afficher_effet?"./images/Bdarija2.png": scrolly>80 | window.innerWidth<=786?"./images/Bdarija2.png":"./images/bdbll.png"}`}/>
                   </a>
           </div>
             {/* Chercher input*/}
@@ -39,24 +53,22 @@ export default function Navbar(){
             <div className={`${open?"max-afficher max-md:w-52 max-md:mx-auto max-md:absolute max-md:top-[125px] duration-500":"max-md:hidden"} `}>
                 <div className="relative w-full z-[11]">
                     <input type="search" id="location-search" className={`block p-2.5 w-full max-md:w-[95%] outline-none text-md text-gray-900
-                       bg-gray-50 rounded-r-lg border-2  border-[#00B3FF] ${scrolly>110?"afficher ":"cacher"} `} 
+                       bg-gray-50 rounded-r-lg border-2  border-[#00B3FF] ${!afficher_effet?"afficher":scrolly>130 ?"afficher":"cacher"}`} 
                         placeholder="Search for any service.."  onChange={(e)=>{setsearch(e.target.value)}} />
-                    <button type="submit" className={`absolute top-0 right-0 p-2 md:px-3 px-1  text-sm font-medium text-white bg-[#00B3FF]
-                         rounded-r-lg border border-[#00B3FF] ${scrolly>110?"afficher":"cacher"}`}>
-                        <svg aria-hidden="true" className="w-6 h-7 text-white" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-</svg>
-
-                        <span className="sr-only">Search</span>
-                    </button>
+                    <a href="/services"><button type="submit" className={`absolute top-0 right-0 p-2 md:px-3 px-1  text-sm font-medium text-white bg-[#00B3FF]
+                         rounded-r-lg border border-[#00B3FF] ${!afficher_effet?"afficher":scrolly>130 ?"afficher":"cacher"}`}>
+                        <svg aria-hidden="true" className="w-6 h-7 text-white"   fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round"  strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                          </svg>
+                    </button></a>
                 </div>
             </div>
           </div>
         </div>
         
-         <div className="partie2_nav">
-            <div className='slider_resp_nav'  onClick={() => setOpen(!open)}>
-                <ion-icon name={open ? 'close' : 'menu'}></ion-icon>
+         <div className="partie2_nav" onClick={() => setOpen(!open)}>
+            <div className='slider_resp_nav' >
+                <ion-icon name={open ? 'close' : 'menu'} ></ion-icon>
             </div>
             {/* les liens */}
             <div className="flex md:items-center h-[45px]">
@@ -64,15 +76,15 @@ export default function Navbar(){
                     {Links.map((link) => (
                       <li key={link.name} className={`md:ml-5 md:my-0 my-2 w-fit md:text-[17px] text-md 
                           ${open ?'li_resp' : 'max-md:hidden'}`}>
-                          <a href={link.link} className={`${scrolly>80?"md:text-[#62646a]":"md:text-white"} hover:md:text-gray-400 duration-500 whitespace-nowrap`}>
+                          <a href={link.link} className={`${!afficher_effet ?"md:text-[#62646a]":scrolly>80?"md:text-[#62646a]":"md:text-white"} hover:md:text-gray-400 duration-500 whitespace-nowrap`}>
                           {link.name}</a>
                       </li> ))
                     }
                 </ul> 
             </div>
             {/* login et creation compte */}
-            <div className='div_signin'  onClick={() => setOpen(!open)}>
-                <a className={`signin text-md bg-black text-white ${scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
+            <div className='div_signin' >
+                <a className={`signin text-md bg-black text-white ${!afficher_effet ?"md:bg-black md:text-white":scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
                   Sign in
                 </a>
             </div>
@@ -81,7 +93,7 @@ export default function Navbar(){
 
       {/* les categories */}
       <div className={`div_categories bg-white hidden md:flex justify-center  lg:pl-[15%] lg:pr-[12%] md:px-[5%]  border-b
-       ${scrolly>110?"afficher border-t":"cacher duration-500"}`}>
+ ${!afficher_effet?"afficher border-t":scrolly>130 ?"afficher  border-t":"cacher duration-500"}`}>
           <ul className={`ul_categories  ${open ?'hidden':'afficher '}`}>
               {Links2.map((link) => (
               <div>

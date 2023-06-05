@@ -26,7 +26,7 @@ export default function Page_visiteur(){
 
     return(<>
             {/* nav de la page */}
-            <Navbar/>
+            <Navbar afiche={true}/>
             {/* image accueil */}
             <div className="slide"><img src="images/img2.jpeg" className="img_slider" /></div>  
             {/* section services populaires */}

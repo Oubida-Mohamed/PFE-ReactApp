@@ -17,9 +17,9 @@ export default function Page_dv_Vendeur(){
   function showStep(step){
     switch(step){
       case 1:
-        return <Professional_info/> 
+        return <Personal_info />
       case 2:
-        return <Personal_info /> 
+        return   <Professional_info/> 
       case 3:
         return <Linked_accounts />
       case 4:

@@ -43,14 +43,22 @@ export default function Education(){
         vendData.profesonel_info.education.push(obj)
         setdata(vendData.profesonel_info.education)
         setafiche(false)
-        }
-        
+        } 
     }
 }
-console.log(data)
+const delete_func=(data_delete)=>{
+  if (data.length==1){
+    setafiche(true)
+}
+  const datarest=vendData.profesonel_info.education.filter((dt)=>{return dt.title!=data_delete.title && 
+    dt.speciality!=data_delete.speciality && dt.year!=data_delete.year
+     && dt.university!=data_delete.university && dt.country_universty!=data_delete.country_universty})
+  vendData.profesonel_info.education=datarest
+  setdata(vendData.profesonel_info.education)
+}
     return(<>
         {afiche==true?<div className='border-2 p-2.5'>
-          <div className='flex  justify-around mb-2  '>
+          <div className='flex  justify-around mb-3   '>
                 <div className=" h-12 md:w-[200px] lg:w-[200px] xl:w-[300px]  bg-gray-50">
                         <input className="peer h-full w-full rounded-[7px] border border-gray-300  text-md
                         bg-transparent px-2 py-2.5 font-sans  font-semibold text-blue-gray-700 outline outline-0 
@@ -67,14 +75,14 @@ console.log(data)
                         focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                         placeholder="Speciality ..." onChange={(e)=>{setspeciality(e.target.value)}} />
                 </div>
-                <select className="w-[80px] border border-gray-300 text-lg bg-gray-50 text-black outline-none cursor-pointer rounded-md"
+                <select className=" w-[80px] border border-gray-300 text-lg bg-gray-50 text-black outline-none cursor-pointer rounded-md"
                   onChange={(e)=>{setyear(e.target.value)}}  >
                   <option selected disabled>Year..</option>
                   {yearOptions} 
                 </select>
             </div>
             <div className='flex justify-around'>
-                <div className=" h-12 md:w-[200px] lg:w-[200px] xl:w-[300px] bg-gray-50">
+                <div className="h-12 md:w-[200px] lg:w-[200px] xl:w-[300px] bg-gray-50">
                         <input className="peer h-full w-full rounded-[7px] border border-gray-300  text-md
                         bg-transparent px-2 py-2.5 font-sans  font-semibold text-blue-gray-700 outline outline-0 
                         transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 
@@ -115,7 +123,8 @@ console.log(data)
                                 {dt.year}
                               </td>
                               <td className=" py-2  text-end">
-                              <button className="bg-[#41d049] w-[70px] text-white text-md font-bold py-1 rounded-md mx-2 invisible group-hover:visible ">
+                              <button className="bg-[#41d049] w-[70px] text-white text-md font-bold py-1 rounded-md mx-2 invisible group-hover:visible "
+                              onClick={()=>{delete_func(dt)}}>
                                 delete
                               </button>
                             </td>

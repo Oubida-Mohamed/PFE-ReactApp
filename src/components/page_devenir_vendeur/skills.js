@@ -18,9 +18,7 @@ export default function Skills(){
             setdata(vendData.profesonel_info.skills)
             setdata_update()
             setafiche(!afiche)
-
             }
-            
         }
     }
     // const updtskils=()=>{
@@ -30,13 +28,13 @@ export default function Skills(){
     //         dt.level=data_update.level
     //         setdata_update()
     //         setafiche(!afiche)
-
     //     }
-
     //     })
- 
     // }
     const delete_func=(titr,levl)=>{
+        if (data.length==1){
+            setafiche(true)
+        }
         const datarest=vendData.profesonel_info.skills.filter((d)=>{return d.titre!=titr && d.level!=levl})
         vendData.profesonel_info.skills=datarest
         setdata(vendData.profesonel_info.skills)
@@ -107,7 +105,7 @@ export default function Skills(){
                             </td>
                             <td className="px-2 py-3 text-end">
                                 <button className='bg-[#41d049] w-[70px] text-white  text-md font-bold py-1 rounded-md mx-2  invisible group-hover:visible ' 
-                                    onClick={()=>{delete_func(sk.titre,sk.level);setafiche(true);setupdt(false);}}>delete</button>
+                                    onClick={()=>{delete_func(sk.titre,sk.level);}}>delete</button>
                                     {/* <button className='bg-[#41d049] w-[90px] text-white  text-md font-bold py-1 rounded-md' 
                                     onClick={()=>{setdata_update(data.find((d)=>{return d.titre==sk.titre}));setupdt(true);
                                      setafiche(true);}}>edite</button> */}
