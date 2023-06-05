@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import 'animate.css';
+import Login from '../login/Login';
 import "../../assets/navbar.css"
 import { Links2 } from '../../data';
 // Import Swiper React components
@@ -15,8 +17,7 @@ import { EffectFlip, Pagination, Navigation } from "swiper";
 export default function Navbar(props){
   let Links = [
       { name: "Home", link: "/" },
-      { name: "Become a Seller", link: "/seller" },
-      { name: "Sign up", link: "/seller" }];
+      { name: "Become a Seller", link: "/seller" }];
 
       let [scrolly, setscrolly] = useState();
       window.addEventListener('scroll',()=>{setscrolly(window.scrollY)})
@@ -38,7 +39,15 @@ export default function Navbar(props){
           // setscrolly(0)
         }
       })
-  return(
+
+      const [isModalOpen, setIsModalOpen] = useState(false);
+      const openModal = () => {
+        setIsModalOpen(true);
+      };
+      const closeModal = () => {
+        setIsModalOpen(false);
+      };
+  return(<>
     <div className={`nav relative`} >
       <div className={`nav_content ${!afficher_effet ?"md:bg-white":scrolly>80?"md:bg-white":""}`}>
         <div className='partie1_nav'>
@@ -80,13 +89,19 @@ export default function Navbar(props){
                           {link.name}</a>
                       </li> ))
                     }
+                     <li className={`md:ml-5 md:my-0 my-2 w-fit md:text-[17px] text-md 
+                          ${open ?'li_resp' : 'max-md:hidden'}`}>
+                          <a onClick={openModal} className={`${!afficher_effet ?"md:text-[#62646a] cursor-pointer":scrolly>80?"md:text-[#62646a]":"md:text-white"} hover:md:text-gray-400 duration-500 whitespace-nowrap cursor-pointer`}>
+                          Sign in</a><Login isOpen={isModalOpen} setOpen={closeModal} log={false}/>
+                      </li>
                 </ul> 
             </div>
             {/* login et creation compte */}
             <div className='div_signin' >
-                <a className={`signin text-md bg-black text-white ${!afficher_effet ?"md:bg-black md:text-white":scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
-                  Sign in
+                <a onClick={openModal} className={`signin text-md bg-black text-white ${!afficher_effet ?"md:bg-black md:text-white":scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
+                  Sign up
                 </a>
+                <Login isOpen={isModalOpen} setOpen={closeModal} log={true}/>
             </div>
         </div>
       </div>
@@ -127,4 +142,5 @@ export default function Navbar(props){
           </ul> 
       </div>
   </div>
+  </>
 )}
