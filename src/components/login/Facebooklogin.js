@@ -7,7 +7,8 @@ const Facebooklogin=()=>{
         console.log("login result", res );
     }
     return <div>
-        <FacebookLogin
+        <FacebookLogin 
+        
         appId="3454279754812391"
         autoLoad={false}
         fields="name,email,picture"
@@ -22,6 +23,7 @@ const Facebooklogin=()=>{
         //     </button>)} 
         cssClass="FacebookLogin"
         textButton="Continue with Facebook"
+        
         />
     </div>
 }

@@ -25,7 +25,7 @@ const Login=(props)=>{
     return <div>
         
     
-        <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-[rgba(0,0,0,.65)] py-[110px]" >
+        <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-[rgba(0,0,0,.65)] pt-[148px] pb-[110px] z-[999]" >
         <div className="flex justify-center animate__animated animate__zoomIn">
         <div className="min-[870px]:flex hidden w-[400px] h-[550px]">
             <img src="images/login1.jpg" alt="login" className="w-full h-full rounded-l-lg"/>
@@ -59,9 +59,9 @@ const Login=(props)=>{
 
                 <div className="mt-2 grid space-y-4 flex justify-center items-center" >
                     <Googlelogin/>
-                    <div className="relative flex items-center space-x-4 justify-center">
-                        <Facebooklogin/>    
-                        <img src="images/facebook.png" className="absolute left-9 w-5 mr-[100px]" alt="Facebook logo"/>
+                    <div className="relative flex items-center space-x-4 justify-center font-semibold">
+                        <Facebooklogin />    
+                        <img src="images/facebook.png" className="absolute left-9 w-5 mr-[100px]" alt="Facebook logo" />
                     </div>
                 </div>
 

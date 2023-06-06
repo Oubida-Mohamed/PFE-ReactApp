@@ -41,7 +41,7 @@ export default function Page_visiteur(){
                         768: {slidesPerView: 3,spaceBetween: 20},1024: { slidesPerView: 3,spaceBetween: 15},
                       1100: { slidesPerView: 3,spaceBetween: 10,},1280: {slidesPerView: 4, spaceBetween: 20,},
                       }}
-                    className="mySwiper">
+                    className="mySwiper z-0">
                     {populaire_serv.map((popserv,i1)=>{return(
                             <SwiperSlide key={i1}><SubCategorie  service={popserv}/></SwiperSlide>)
                         })
