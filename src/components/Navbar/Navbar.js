@@ -40,19 +40,23 @@ export default function Navbar(props){
         }
       })
 
-      const [isModalOpen, setIsModalOpen] = useState(false);
+      const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
+      const [isModalOpenLogin, setIsModalOpenLogin] = useState(false);
       const [create, setcreate] = useState(false);
 
       const openModalCreate = () => {
-        setIsModalOpen(true);
+        setIsModalOpenCreate(true);
         setcreate(true);
+        setIsModalOpenLogin(false);
       };
       const openModalLogin = () => {
-        setIsModalOpen(true);
+        setIsModalOpenLogin(true);
         setcreate(false);
+        setIsModalOpenCreate(false);
       };
       const closeModal = () => {
-        setIsModalOpen(false);
+        setIsModalOpenCreate(false);
+        setIsModalOpenLogin(false);
       };
   return(<>
     <div className={`nav relative`} >
@@ -99,7 +103,7 @@ export default function Navbar(props){
                      <li className={`md:ml-5 md:my-0 my-2 w-fit md:text-[17px] text-md 
                           ${open ?'li_resp' : 'max-md:hidden'}`}>
                           <a onClick={openModalLogin} className={`${!afficher_effet ?"md:text-[#62646a] cursor-pointer":scrolly>80?"md:text-[#62646a]":"md:text-white"} hover:md:text-gray-400 duration-500 whitespace-nowrap cursor-pointer`}>
-                          Sign in</a><Login isOpen={isModalOpen} setOpen={closeModal} log={create}/>
+                          Sign in</a><Login isOpen={isModalOpenLogin} setOpen={closeModal} log={create}/>
                       </li>
                 </ul> 
             </div>
@@ -108,7 +112,7 @@ export default function Navbar(props){
                 <a onClick={openModalCreate} className={`signin text-md bg-black text-white ${!afficher_effet ?"md:bg-black md:text-white":scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
                   Join
                 </a>
-                <Login isOpen={isModalOpen} setOpen={closeModal} log={create}/>
+                <Login isOpen={isModalOpenCreate} setOpen={closeModal} log={create}/>
             </div>
         </div>
       </div>

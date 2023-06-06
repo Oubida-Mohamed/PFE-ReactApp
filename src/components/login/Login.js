@@ -25,7 +25,7 @@ const Login=(props)=>{
     return <div>
         
     
-        <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-black/75 py-[110px]" >
+        <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-[rgba(0,0,0,.65)] py-[110px]" >
         <div className="flex justify-center animate__animated animate__zoomIn">
         <div className="min-[870px]:flex hidden w-[400px] h-[550px]">
             <img src="images/login1.jpg" alt="login" className="w-full h-full rounded-l-lg"/>
