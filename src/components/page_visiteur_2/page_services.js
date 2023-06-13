@@ -64,7 +64,7 @@ function PageServices() {
     }
 
 
-  },[data])
+  },[data]);
 
 // console.log(datail_filter)
 
