@@ -1,16 +1,16 @@
 import React, { useState,useEffect } from 'react';
 import Modal from 'react-modal';
+import CryptoJS from 'crypto-js';
 import Facebooklogin from './Facebooklogin';
 import Googlelogin from './GoogleLogin';
-
 Modal.setAppElement('#root');
+
+
 const Login=(props)=>{
     const Tab_SignIn = ["Sign in to your account", "Don't have an account?", "Join here", "Sign in"];
     const Tab_Join = ["Create a new account", "Already have an account?", "Sign in", "Create"];
-
     const [IsOpen,setIsOpen] = useState(false);
     const [create,setcreate] = useState(props.log);
-    
     useEffect(()=>{
         setIsOpen(props.isOpen);
     },[props.isOpen]);
@@ -21,16 +21,54 @@ const Login=(props)=>{
     useEffect(()=>{
         setcreate(props.log);
     },[props.log]);
-    
+
+    //UseStates
+    const [name,setName] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPass] = useState('');
+
+    const hashPassword = (pass) => {
+      const hash = CryptoJS.MD5(pass).toString();
+      setPass(hash); // Output: 65a8e27d8879283831b664bd8b7f0ad4
+    };
+    const register = async ()=>{
+        const response = await fetch('http://localhost:8000/api/register', 
+          {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+                name,
+                email,
+                password
+            })
+          }
+        );
+        console.log(await response.json());
+      }
+      const login = async ()=>{
+        await fetch('http://localhost:8000/api/login', 
+          {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            credentials:'include',
+            body: JSON.stringify({
+                email,
+                password
+            })
+          }
+        );
+        // console.log(email, password);
+      }
+
+
+
     return <div>
-        
-    
         <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-[rgba(0,0,0,.65)] pt-[148px] pb-[110px] z-[999]" >
         <div className="flex justify-center animate__animated animate__zoomIn">
-        <div className="min-[870px]:flex hidden w-[400px] h-[550px]">
+        <div className="min-[870px]:flex hidden w-[400px] h-[560px]">
             <img src="images/login1.jpg" alt="login" className="w-full h-full rounded-l-lg"/>
         </div>
-        <div className="min-[550px]:w-[450px] w-full h-[550px] min-[870px]:rounded-r-lg max-[870px]:rounded-lg bg-white">
+        <div className="min-[550px]:w-[450px] w-full h-[560px] min-[870px]:rounded-r-lg max-[870px]:rounded-lg bg-white">
             <button onClick={closeModal} className='w-5 h-5 ml-[420px] mt-[5px]'>
                 <img src='images/croix.png' alt='coix icons' className='w-full h-full'/>
             </button>
@@ -39,17 +77,21 @@ const Login=(props)=>{
             <p className="mx-[50px]">{!create?Tab_SignIn[1]:Tab_Join[1]} <a className='cursor-pointer' onClick={()=>{setcreate(!create)}}>{!create?Tab_SignIn[2]:Tab_Join[2]}</a> </p>
 
             <div className="w-full px-8">
-                <div className="mb-4 mt-6">
+                {create?<div className={`${create?'mb-1 mt-2':'mb-4 mt-6'}`}>
+                    <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">Name</label>
+                    <input className="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10" id="name" type="text" placeholder="Your name" onChange={(e)=>setName(e.target.value)} />
+                </div>:''}
+                <div className={`${create?'mb-1 mt-2':'mb-4 mt-6'}`}>
                     <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">Email</label>
-                    <input className="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10" id="email" type="text" placeholder="Your email address"/>
+                    <input className="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10" id="email" type="email" placeholder="Your email address" onChange={(e)=>setEmail(e.target.value)} />
                 </div>
-                <div className="mb-6 mt-6">
+                <div className={`${create?'mb-1 mt-2':'mb-4 mt-6'}`}>
                     <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="password">Password</label>
-                    <input className="text-sm bg-gray-200 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10" id="password" type="password" placeholder="Your password"/>
-                    <a className="inline-block align-baseline text-sm text-gray-600 hover:text-gray-800" href="/">Forgot Password?</a>
+                    <input className="text-sm bg-gray-200 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10" id="password" type="password" placeholder="Your password" onChange={(e)=>hashPassword(e.target.value)} />
+                    {!create?<a className="inline-block align-baseline text-sm text-gray-600 hover:text-gray-800" href="/">Forgot Password?</a>:''}
                 </div>
-                <div className="flex w-full mt-8">
-                    <button className="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded h-10" type="button">{!create?Tab_SignIn[3]:Tab_Join[3]}</button>
+                <div className="flex w-full mt-6">
+                    <button className="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded h-10" type="button" onClick={create?register:login}>{!create?Tab_SignIn[3]:Tab_Join[3]}</button>
                 </div>
                 </div>
 
