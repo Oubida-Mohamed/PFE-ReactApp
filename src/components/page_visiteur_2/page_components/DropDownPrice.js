@@ -7,7 +7,7 @@ const DropDownPrice=()=>{
             <span className="mt-[7px] md:ml-7 ml-4">Budgets</span> 
             <img src="/images/Arrow.png" alt="Arrow" className={`w-[25px] h-[20px] mt-[10px] ml-[10px] md:mr-7 mr-4 ${((Clicked===true)?'duration-100':'rotate-180 duration-100')}`}/>
         </button>
-        <div className={`absolute w-auto h-auto bg-gray-50 p-5 rounded border-2 mt-[50px] ${(Clicked===true)?'':'hidden'}`}>
+        <div className={`absolute w-auto h-auto bg-gray-50 p-5 rounded border-2 mt-[50px] z-10 ${(Clicked===true)?'':'hidden'}`}>
             <form>
                 <div className="inline mx-5">
                     <label htmlFor="min">Min </label>
