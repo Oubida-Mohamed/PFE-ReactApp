@@ -4,7 +4,7 @@ export default function Footer() {
             <footer className="rounded-lg flex items-center justify-between  ">
             <div className='div_logo'>
                   <a href='/'>
-                      <img src="./images/Bdarija2.png"/>
+                      <img src="/images/Bdarija2.png"/>
                   </a>
           </div>
                 <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com" className="hover:underline" target="_blank">Flowbite™</a>. All Rights Reserved.

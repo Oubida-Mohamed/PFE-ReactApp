@@ -1,19 +1,22 @@
 import "./Service.css";
 import { useState } from "react";
+import { Routes, Route, Link } from 'react-router-dom';
+
 const Service =(props) =>{
     const service = props.service;
     const [dore,setdore] = useState(false);
 
+
     return <div className="w-[250px] h-[300px] xl:w-[300px] relative bg-white shadow-xl hover:shadow-2xl mx-1 rounded-lg my-3">
                
-                <a href="/">
-                    <img src={service.images} alt="Service" className="w-[100%] h-[150px] rounded-t-lg" />
+                <a href={`Services/${service.id}`} >
+                    <img src="/images/Test3.jpg" alt="Service" className="w-[100%] h-[150px] rounded-t-lg" />
                 </a>
                 
                 <div className="info_service px-4 w-[100%]">
-                    <a href="/1">
+                    <a href="/">
                         <div className="profil flex mt-[5px]">
-                            <img src={service.photoProfil} alt="eroor" className="w-[30px] h-[30px] rounded-full"/>
+                            <img src="/images/profil.jpeg" alt="eroor" className="w-[30px] h-[30px] rounded-full"/>
                             <span className="mt-[6px] mx-[10px]">{service.nomSeller}</span>
                         </div>
                     </a>
@@ -24,7 +27,7 @@ const Service =(props) =>{
                     <a href="/">
                         <p className="w-full mt-[5px]">{service.description}</p>
                         <div className="mt-[5px] flex">
-                            <img src="images/star.png" alt="error" className="w-[20px] h-[20px]"/> <span className="mt-[px] mx-[3px]"><span className="font-bold text-yellow-400">{service.AvgStars} </span>({service.nbOrders})</span>
+                            <img src="/images/star.png" alt="error" className="w-[20px] h-[20px]"/> <span className="mt-[px] mx-[3px]"><span className="font-bold text-yellow-400">{service.AvgStars} </span>({service.nbOrders})</span>
                         </div>
                         <div className="font-bold">
                             <p>From <span>{service.from}</span> <span>{service.price}$</span></p>

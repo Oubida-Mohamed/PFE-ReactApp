@@ -15,8 +15,10 @@
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-modal": "^3.16.1",
+    "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
     "styled-components": "^6.0.0-rc.1",
     "swiper": "^9.3.2",
     "web-vitals": "^2.1.4"

@@ -7,38 +7,116 @@ import Pagination from './page_components/pagination';
 import { useState ,useEffect } from 'react';
 import Navbar from "../Navbar/Navbar";
 import Footer from "../page_visiteur/footer";
-
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function PageServices() {
+  let {categorie}=useParams()
+  let {subcategorie}=useParams()
+  let {search2}=useParams()
+  let {header}=useParams()
+  let {id}=useParams()
+
   const [currentPage, setCurrentPage] = useState();
+  const [cg, setcg] = useState([]);
+  const [datail_filter, setdatail_filter] = useState([]);
+  const [data, setdata] = useState([]);
   const nbrPages = Math.ceil(services.length/24);
-  useEffect(() => { setCurrentPage(1); }, []);
+
+  const data2 = useSelector((state) => state.data);
+  const categories = useSelector((state) => state.categorie);
+  // console.log(categories)
+  useEffect(() => {
+
+    setCurrentPage(1);
+    fetch(`http://127.0.0.1:8000/api/services`).then(rep=>rep.json())
+        .then(rep_data=>{setdata(rep_data)})
+        .catch(error=>console.log(error))
+    // function xx(){
+    //   console.log(categories)
+      
+    // if(categories.length>0 && categorie!=null && data.length>0){
+    //   data.filter((d)=>{return d.sub_categories_id=="2"})
+    // categories.map((d)=>{
+    //   if(d.label==categorie){
+    //     d.headers.map((dp)=>{
+    //     if(dp.label_header==header){
+    //       dp.subcategories.map((dps)=>{
+    //         if(dps.label==subcategorie){
+    //           )}
+    //       })
+    //     }
+    //   })
+    //}})
+    // console.log(servs)
+  // }else{
+   
+  // }
+  // }
+  // if(categories.length>0 && categorie!=null && data.length>0){
+  // xx();}
+  },[]);
+
+  useEffect(()=>{
+    console.log(categories.length)
+    if(id!=null){
+      console.log(data.filter((d)=>{return d.sub_categories_id==id}))
+    }
+
+
+  },[data])
+
+// console.log(datail_filter)
+
+  // console.log(data_filter)
+  // useEffect(() => {
+  //   function filter_subcategorie(){
+
+  //     // data.filter((fc)=>{
+  //     //   if(fc.sub_categories_id==id){
+  //     //     console.log(fc)
+  //     //   }
+  //     // })
+
+  // categories.map((d)=>{if(d.headers.label==categorie){
+  //   d.map((dp)=>{if(dp.label==header){
+  //     dp.map((dps)=>{if(dps.subcategories.label==subcategorie){
+  //      console.log(dps.id)
+
+  //     }})
+  //   }})
+  // }})
+  
+    
+  // }, []);
   function handlePageChange(newPage) {
     setCurrentPage(newPage);
   }
+
   const begin = (currentPage-1)*24;
   const end = currentPage * 24;
-
   const [ButtonChecked, setButtonChecked]=useState(false);
   const handleChange=(state)=>{
     setButtonChecked(state);
   }
-
   return <div>
-    <Navbar afiche={false}/>
+    <Navbar afiche={false} detail_services={false}/>
   <div className="container mx-auto mt-[150px]">
     {/* Description */}
-    <div className="mx-5 space-y-[10px]">
-      <div className="flex space-x-[20px]">
-        <a href="/" className="w-[29px] h-[29px] rounded-[50%] p-[7px] hover:bg-gray-200"><img src="images/home.png" alt="home" className=""/></a>
-        <span className="mt-[3px]">/</span>
-        <span className="mt-[3px]">Categorie & Categorie</span>
-      </div>
-      <div className="space-y-[10px]">
-        <h2 className="font-bold text-2xl">SubCategorie</h2>
-        <p>Stand out from the crowd with a logo that fits your brand personality.</p>
-      </div>
-    </div>
+      {subcategorie!=null ? <div className="mx-5 space-y-[10px]"><div className="flex space-x-[20px]">
+       <a href="/" className="w-[29px] h-[29px] rounded-[50%] p-[7px] hover:bg-gray-200"><img src="/images/home.png" alt="home" className=""/></a>
+       <span className="mt-[3px]">/</span>
+       <span className="mt-[3px]">{categorie}</span>
+     </div>
+     <div className="space-y-[10px]">
+       <h2 className="font-bold text-2xl">{subcategorie}</h2>
+       <p>Stand out from the crowd with a logo that fits your brand personality.</p>
+     </div>
+     </div>:<div className="flex space-x-[20px] ml-[2.5%]">
+        <span className="mt-[25px]  text-[1.8rem]">Results for </span>
+        <span className="mt-[25px] text-[1.8rem]"> {search2}</span>
+      </div>}
+      {/* {data_filter.length==0 && search2!=null?<div className="text-red-500 ml-[2.5%] text-lg mt-5 ">Im sorry services "{search2}" not found </div>:null} */}
     {/* Filter */}
     <div className=" mt-10 md:flex  ">
       <div className=" flex ">

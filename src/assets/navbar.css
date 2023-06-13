@@ -1,5 +1,5 @@
 .nav{
-    @apply w-full top-0 left-0 fixed z-10  border-b-2 md:border-none;
+    @apply w-full top-0 left-0  border-b-2 md:border-none;
 }
 .nav_content{
     @apply h-24 flex items-center justify-between max-md:bg-white lg:px-[12%] md:px-[5%]  
@@ -57,4 +57,11 @@
 }
 .mySwiper{
     @apply z-0 !important;
+}
+.div_nav_detail_service1{
+    @apply fixed z-10 top-0 w-full
+}
+
+.nav_detail_service2{
+    @apply bg-white hidden md:flex justify-start  lg:pl-[13%] lg:pr-[12%] md:px-[5%]  border-b 
 }
