@@ -5,6 +5,7 @@ import "../../assets/navbar.css"
 import {navbar_detailservice,Links,menu} from '../../data';
 import { useNavigate,Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import Cookies from "universal-cookie"
 
 export default function Navbar(props){
       let [scrolly, setscrolly] = useState();
@@ -16,10 +17,16 @@ export default function Navbar(props){
       const [data,setdata]=useState();
       const [service_data,setservice_data]=useState();
       const [afficher_effet,setafficher_effet]=useState();
-      const [x,setx]=useState(true)
+      const [x,setx]=useState(false)
       const [open_prf,setopen_prf]=useState(false)
       const dispatch=useDispatch()
       let {search2}=useParams()
+      const cookie=new Cookies()
+      if(cookie.get("jwt")!=undefined){
+        // setx(true)
+        
+      }
+      // console.log(cookie.get("jwt"))
       
       useEffect(()=>{
         const dat=async()=>{
@@ -115,7 +122,7 @@ export default function Navbar(props){
             </div>
             {/* les liens */}
             <div className="flex md:items-center h-[45px]">
-            {x==false?<ul className={`ul ${open ?'responsive_lien ':'absolute'}`}>
+            {cookie.get("jwt")==undefined?<ul className={`ul ${open ?'responsive_lien ':'absolute'}`}>
                 {Links.map((link) => (
                       <li key={link.name} className={`md:ml-5 md:my-0 my-2 w-fit md:text-[17px] text-md 
                           ${open ?'li_resp' : 'max-md:hidden'}`}>
@@ -164,10 +171,10 @@ export default function Navbar(props){
             </div>
             {/* login et creation compte */}
             <div className='div_signin' >
-            {x==false?<a onClick={openModalCreate} className={`signin text-md bg-black text-white ${!afficher_effet ?"md:bg-black md:text-white":scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
+            {cookie.get("jwt")==undefined?<a onClick={openModalCreate} className={`signin text-md bg-black text-white ${!afficher_effet ?"md:bg-black md:text-white":scrolly>80?"md:bg-black md:text-white":"md:bg-white md:text-black"}`}>
                   Join
                 </a>:<div className=''>
-            <img alt="..." src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" class="shadow-xl rounded-full h-8 align-middle border-none 
+            <img alt="..." src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" className="shadow-xl rounded-full h-8 align-middle border-none 
             lg:ml-6 mb-2 max-w-10-px " onClick={()=>{setopen_prf(!open_prf)}}/>
              {open_prf && <ul className='absolute t-[50px] p-4 w-36 shadow-md bg-white'>{menu.map((m)=>{ return <li key={m} 
              className='text-lg cursor-pointer rounded hover:bg-blue-100 px-2'><a href={m.link}>{m.name}</a></li>
