@@ -20,10 +20,7 @@ export default function Page_dv_Vendeur(){
         return <Personal_info />
       case 2:
         return   <Professional_info/> 
-      case 3:
-        return <Linked_accounts />
-      case 4:
-        return <Accounts_security />
+      
     }
   }
     return(
@@ -46,12 +43,7 @@ export default function Page_dv_Vendeur(){
         <Step>
           <StepLabel> Professional Info</StepLabel>
         </Step>
-        <Step>
-          <StepLabel> Linked Accounts</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>  Accounts Security</StepLabel>
-        </Step>
+       
       </Stepper>
       <div className='progressbar  visible md:hidden'>
           <div style={{ width: step - 1 == 0 ? "25%" : step - 1 == 1 ? "50%" : step - 1 == 2 ? "75%" : "100" }}></div>

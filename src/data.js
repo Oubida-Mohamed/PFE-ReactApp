@@ -37,5 +37,8 @@ export const navbar_detailservice=[
   
 export const Links = [
   { name: "Home", link: "/" },
-  { name: "Become a Seller", link: "/seller" }
+  { name: "Become a Seller", link: "/devenir_vendor" }
 ];
+export const menu=[{name:"Profil",link:"/profile"},{name:"Setting",link:"/Setting"}
+
+]
