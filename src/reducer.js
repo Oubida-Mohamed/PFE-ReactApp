@@ -1,7 +1,7 @@
 const initialState={
      data:[],
-     categorie:[]
-
+     categorie:[],
+     login:false,
 }
 const reducer=(state=initialState,action)=>{ 
 
@@ -10,6 +10,8 @@ const reducer=(state=initialState,action)=>{
             return {...state,categorie:(action.categorie)}
         case "modify_data":
             return {...state,data:(action.data)}
+        case "login":
+            return {...state, login:(action.log)}
     }
     return state
 }
