@@ -59,15 +59,17 @@ export default function Navbar(props){
       }
       const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
       const [isModalOpenLogin, setIsModalOpenLogin] = useState(false);
-      const [create, setcreate] = useState(false);
+      // const [create, setcreate] = useState(false);
+      const create = useSelector(e=>e.login); 
+
       const openModalCreate = () => {
         setIsModalOpenCreate(true);
-        setcreate(true);
+        dispatch({type:'login',log:true});
         setIsModalOpenLogin(false);
       };
       const openModalLogin = () => {
         setIsModalOpenLogin(true);
-        setcreate(false);
+        dispatch({type:'login',log:false});
         setIsModalOpenCreate(false);
       };
       const closeModal = () => {
