@@ -44,7 +44,7 @@ const Login=(props)=>{
             })
           }
         ).then(res=>res.json())
-        .then(resdata=>cookies.set('jwt', resdata.token));
+        .then((resdata)=>{cookies.set('jwt', resdata.token);console.log(resdata)});
       }
       const login = async ()=>{
         await fetch('http://localhost:8000/api/login', 
