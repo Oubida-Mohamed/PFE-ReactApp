@@ -5,10 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import Facebooklogin from './Facebooklogin';
 import Googlelogin from './GoogleLogin';
 import Cookies from 'universal-cookie';
+import { useNavigate } from 'react-router-dom';
 Modal.setAppElement('#root');
 
 
 const Login=(props)=>{
+    const Navigate = useNavigate();
     const cookies = new Cookies();
     const dispatch = useDispatch();
     const Tab_SignIn = ["Sign in to your account", "Don't have an account?", "Join here", "Sign in"];
@@ -26,11 +28,18 @@ const Login=(props)=>{
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPass] = useState('');
+    // const [Data, setData] = useState();
 
     const hashPassword = (pass) => {
       const hash = CryptoJS.MD5(pass).toString();
       setPass(hash); 
     };
+    
+    const user = async ()=>{
+        await fetch('http://localhost:8000/api/user').then(res=>res.json()).then(data=>console.log(data));
+    }
+    
+      
     const register = async ()=>{
         await fetch('http://localhost:8000/api/register', 
           {
@@ -45,6 +54,7 @@ const Login=(props)=>{
           }
         ).then(res=>res.json())
         .then(resdata=>cookies.set('jwt', resdata.token));
+        return Navigate('/');
       }
       const login = async ()=>{
         await fetch('http://localhost:8000/api/login', 
@@ -59,6 +69,7 @@ const Login=(props)=>{
           }
         ).then(res=>res.json())
         .then(resdata=>cookies.set('jwt', resdata.token));
+        return Navigate('/services');
         
       }
     //   const cookieValue = cookies.get('jwt');

@@ -6,17 +6,17 @@ import Modal from 'react-modal';
 import CryptoJS from 'crypto-js';
 import Cookies from 'universal-cookie';
 import "./login.css";
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Googlelogin=()=>{
+  
   const cookies = new Cookies();
   const [IsOpen,setIsOpen] = useState(false);
     const [name,setName] = useState('');
-    const [email,setEmail] = useState('Email_vide');
+    const [email,setEmail] = useState('');
     const [password,setPass] = useState('');
     const create = useSelector(e=>e.login); 
     const Navigate = useNavigate();
-    const [TestData, setTestData] = useState();
     
     const closeModal = () => {
       setIsOpen(false);
@@ -33,6 +33,8 @@ const Googlelogin=()=>{
               password
           })
         }).then(res=>res.json()).then(resdata=>cookies.set('jwt', resdata.token));
+        // setIsOpen(false);
+        return Navigate('/services');
     };
 
     const login = async (email)=>{
@@ -46,13 +48,12 @@ const Googlelogin=()=>{
           })
         }
       ).then(res=>res.json()).then(resdata=>cookies.set('jwt', resdata.token));
-      // return Navigate('/user');
+      return Navigate('/services');
     };
     const hashPassword = (pass) => {
       const hash = CryptoJS.MD5(pass).toString();
       setPass(hash);
     };
-
     useEffect(()=>{
         function Start(){
           gapi.client.init({
@@ -68,7 +69,6 @@ const Googlelogin=()=>{
         console.log("Login Success", res.profileObj);
         setName(res.profileObj.name);
         setEmail(res.profileObj.email);
-        setTestData(res.profileObj);
         if(create){
           setIsOpen(true);
         }else{
@@ -85,8 +85,8 @@ const Googlelogin=()=>{
     // }
     
     return <div>
-      <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-[rgba(0,0,0,.65)] pt-[148px] pb-[110px] z-[999] ">
-        <div className="w-[250px] h-[150px] justify-center animate__animated animate__zoomIn bg-white rounded-lg">
+      <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="justify-centerw-full h-full bg-[rgba(0,0,0,.65)] pt-[148px] pb-[110px] z-[999]">
+        <div className="w-[250px] h-[150px] justify-center animate__animated animate__zoomIn bg-white rounded-lg mx-[600px] my-[100px]">
           <div className="mb-4 mt-6 ">
             <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="password">Password</label>
             <input className="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10" id="password" type="password" placeholder="Password" onChange={(e)=>hashPassword(e.target.value)} />

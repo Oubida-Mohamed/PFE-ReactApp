@@ -5,7 +5,7 @@ import "../../assets/navbar.css"
 import {navbar_detailservice,Links,menu} from '../../data';
 import { useNavigate,Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Cookies from "universal-cookie"
+import Cookies from "universal-cookie";
 
 export default function Navbar(props){
       let [scrolly, setscrolly] = useState();
@@ -22,11 +22,7 @@ export default function Navbar(props){
       const dispatch=useDispatch()
       let {search2}=useParams()
       const cookie=new Cookies()
-      if(cookie.get("jwt")!=undefined){
-        // setx(true)
-        
-      }
-      // console.log(cookie.get("jwt"))
+
       
       useEffect(()=>{
         const dat=async()=>{
