@@ -3,9 +3,15 @@ import 'animate.css';
 import Login from '../login/Login';
 import "../../assets/navbar.css"
 import {navbar_detailservice,Links,menu} from '../../data';
-import { useNavigate,Link, useParams } from 'react-router-dom';
+import { useNavigate,Link, useParams, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+<<<<<<< HEAD
 import Cookies from "universal-cookie";
+=======
+import Cookies from "universal-cookie"
+import { func } from 'prop-types';
+
+>>>>>>> 82ff95a98832cbcd3e474ed0438aac57c4c1151a
 
 export default function Navbar(props){
       let [scrolly, setscrolly] = useState();
@@ -22,8 +28,12 @@ export default function Navbar(props){
       const dispatch=useDispatch()
       let {search2}=useParams()
       const cookie=new Cookies()
+<<<<<<< HEAD
 
       
+=======
+      const navigate=useNavigate()
+>>>>>>> 82ff95a98832cbcd3e474ed0438aac57c4c1151a
       useEffect(()=>{
         const dat=async()=>{
          await fetch(`http://127.0.0.1:8000/api/Categories`).then(rep=>rep.json())
@@ -53,15 +63,6 @@ export default function Navbar(props){
           dispatch({type:"modify_datafilter",data_filter:servs})
         }
         }
-
-      // function filter_subcategorie(id){
-      //   data.filter((fc)=>{
-      //     if(fc.sub_categories_id==id){
-      //       console.log(fc)
-      //     }
-      //   })
-
-      // }
       const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
       const [isModalOpenLogin, setIsModalOpenLogin] = useState(false);
       // const [create, setcreate] = useState(false);
@@ -81,8 +82,6 @@ export default function Navbar(props){
         setIsModalOpenCreate(false);
         setIsModalOpenLogin(false);
       };
-// console.log(useSelector(df=>df.data_filter))
-// console.log(useSelector(df=>df.data))
   return(<>
     <div className={`nav ${!props.detail_services?"fixed z-10":""}`} >
       <div className={`nav_content ${!afficher_effet ?"md:bg-white":scrolly>80?"md:bg-white":""}`}>
@@ -175,7 +174,7 @@ export default function Navbar(props){
              {open_prf && <ul className='absolute t-[50px] p-4 w-36 shadow-md bg-white'>{menu.map((m)=>{ return <li key={m} 
              className='text-lg cursor-pointer rounded hover:bg-blue-100 px-2'><a href={m.link}>{m.name}</a></li>
 
-            })}<li  className='text-lg cursor-pointer rounded hover:bg-blue-100 px-2' onClick={()=>{console.log("logout")}}>Logout</li>
+            })}<li  className='text-lg cursor-pointer rounded hover:bg-blue-100 px-2' onClick={()=>{cookie.remove('jwt');navigate("/")}}>Logout</li>
             </ul>}</div>
          }
                 <Login isOpen={isModalOpenCreate} setOpen={closeModal} log={create}/>

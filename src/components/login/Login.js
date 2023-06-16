@@ -53,8 +53,12 @@ const Login=(props)=>{
             })
           }
         ).then(res=>res.json())
+<<<<<<< HEAD
         .then(resdata=>cookies.set('jwt', resdata.token));
         return Navigate('/');
+=======
+        .then((resdata)=>{cookies.set('jwt', resdata.token);console.log(resdata)});
+>>>>>>> 82ff95a98832cbcd3e474ed0438aac57c4c1151a
       }
       const login = async ()=>{
         await fetch('http://localhost:8000/api/login', 
