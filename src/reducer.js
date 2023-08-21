@@ -2,6 +2,7 @@ const initialState={
      data:[],
      categorie:[],
      login:false,
+     data_profil:{}
 }
 const reducer=(state=initialState,action)=>{ 
 
@@ -12,6 +13,8 @@ const reducer=(state=initialState,action)=>{
             return {...state,data:(action.data)}
         case "login":
             return {...state, login:(action.log)}
+        case "data_login":
+            return {...state, data_profil:(action.data)}
     }
     return state
 }

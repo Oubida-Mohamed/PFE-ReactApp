@@ -5,13 +5,9 @@ import "../../assets/navbar.css"
 import {navbar_detailservice,Links,menu} from '../../data';
 import { useNavigate,Link, useParams, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-<<<<<<< HEAD
 import Cookies from "universal-cookie";
-=======
-import Cookies from "universal-cookie"
-import { func } from 'prop-types';
 
->>>>>>> 82ff95a98832cbcd3e474ed0438aac57c4c1151a
+
 
 export default function Navbar(props){
       let [scrolly, setscrolly] = useState();
@@ -28,12 +24,9 @@ export default function Navbar(props){
       const dispatch=useDispatch()
       let {search2}=useParams()
       const cookie=new Cookies()
-<<<<<<< HEAD
 
-      
-=======
       const navigate=useNavigate()
->>>>>>> 82ff95a98832cbcd3e474ed0438aac57c4c1151a
+
       useEffect(()=>{
         const dat=async()=>{
          await fetch(`http://127.0.0.1:8000/api/Categories`).then(rep=>rep.json())
@@ -51,22 +44,12 @@ export default function Navbar(props){
           setafficher_effet(false)
         }
       },[])
-      function filter_search(){
-        if(search!=""){
-          const servs=[]
-          data.filter((sd)=>{ 
-            if(sd.tags.indexOf(search) >= 0) {
-              servs.push(sd) 
-              setservice_data(servs)
-             }
-          });
-          dispatch({type:"modify_datafilter",data_filter:servs})
-        }
-        }
+      
       const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
       const [isModalOpenLogin, setIsModalOpenLogin] = useState(false);
       // const [create, setcreate] = useState(false);
       const create = useSelector(e=>e.login); 
+      // const data_profil = useSelector(e=>e.data_profil);
 
       const openModalCreate = () => {
         setIsModalOpenCreate(true);
@@ -101,7 +84,7 @@ export default function Navbar(props){
                         placeholder="Search for any service.."  onChange={(e)=>{setsearch(e.target.value)}}  />
                     <a href={`/services/${search}`}><button type="submit" className={`absolute top-0 right-0 p-2 md:px-3 px-1  text-sm font-medium text-white bg-[#00B3FF]
                          rounded-r-lg border border-[#00B3FF] ${!afficher_effet?"afficher":scrolly>130 ?"afficher":"cacher"}`} 
-                         onClick={filter_search}>
+                         >
                         <svg aria-hidden="true" className="w-6 h-7 text-white"   fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round"  strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                           </svg>
@@ -157,9 +140,10 @@ export default function Navbar(props){
                     </li>
                      <li className={`md:ml-5 md:my-0 my-2 w-fit md:text-[17px] text-md 
                           ${open ?'li_resp' : 'max-md:hidden'}`}>
-                        <a className={` inline-block w-[150px] whitespace-nowrap overflow-hidden text-ellipsis ${!afficher_effet ?"md:text-[#62646a] cursor-pointer":scrolly>80?"md:text-[#62646a]":"md:text-white"} hover:md:text-gray-400 duration-500 whitespace-nowrap cursor-pointer`}>
-                            ayoub oubakkiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</a>
-                          <Login isOpen={isModalOpenLogin} setOpen={closeModal} log={create}/>
+                            {JSON.parse(localStorage.getItem("data"))!=undefined?
+                        <a className={` inline-block w-[60px] whitespace-nowrap overflow-hidden text-ellipsis ${!afficher_effet ?"md:text-[#62646a] cursor-pointer":scrolly>80?"md:text-[#62646a]":"md:text-white"} hover:md:text-gray-400 duration-500 whitespace-nowrap cursor-pointer`}>
+                            {JSON.parse(localStorage.getItem("data")).name}</a>:null}
+                          
                       </li>
                 </ul>
                 }
@@ -171,10 +155,10 @@ export default function Navbar(props){
                 </a>:<div className=''>
             <img alt="..." src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" className="shadow-xl rounded-full h-8 align-middle border-none 
             lg:ml-6 mb-2 max-w-10-px " onClick={()=>{setopen_prf(!open_prf)}}/>
-             {open_prf && <ul className='absolute t-[50px] p-4 w-36 shadow-md bg-white'>{menu.map((m)=>{ return <li key={m} 
+             {open_prf && <ul className='absolute t-[50px] p-4 w-36 shadow-md bg-white'>{menu.map((m,i)=>{ return <li key={i} 
              className='text-lg cursor-pointer rounded hover:bg-blue-100 px-2'><a href={m.link}>{m.name}</a></li>
 
-            })}<li  className='text-lg cursor-pointer rounded hover:bg-blue-100 px-2' onClick={()=>{cookie.remove('jwt');navigate("/")}}>Logout</li>
+            })}<li  className='text-lg cursor-pointer rounded hover:bg-blue-100 px-2' onClick={()=>{cookie.remove('jwt');navigate("/");localStorage.clear()}}>Logout</li>
             </ul>}</div>
          }
                 <Login isOpen={isModalOpenCreate} setOpen={closeModal} log={create}/>

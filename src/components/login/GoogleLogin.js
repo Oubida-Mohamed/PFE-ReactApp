@@ -8,8 +8,8 @@ import Cookies from 'universal-cookie';
 import "./login.css";
 import { useNavigate } from 'react-router-dom';
 
-const Googlelogin=()=>{
-  
+const Googlelogin=(props)=>{
+
   const cookies = new Cookies();
   const [IsOpen,setIsOpen] = useState(false);
     const [name,setName] = useState('');
@@ -17,6 +17,8 @@ const Googlelogin=()=>{
     const [password,setPass] = useState('');
     const create = useSelector(e=>e.login); 
     const Navigate = useNavigate();
+    const [Error, setError] = useState();
+    const [Data, setData] = useState();
     
     const closeModal = () => {
       setIsOpen(false);
@@ -32,13 +34,14 @@ const Googlelogin=()=>{
               email,
               password
           })
-        }).then(res=>res.json()).then(resdata=>cookies.set('jwt', resdata.token));
-        // setIsOpen(false);
-        return Navigate('/services');
+        })
+        .then(res=>res.json())
+        .then(data=>setData(data));
+        props.setOpen();
     };
 
     const login = async (email)=>{
-      await fetch('http://localhost:8000/api/loginGoogle', 
+      await fetch('http://localhost:8000/api/loginGoogle',
         {
           method:"POST",
           headers:{"Content-Type":"application/json"},
@@ -47,8 +50,9 @@ const Googlelogin=()=>{
               email,
           })
         }
-      ).then(res=>res.json()).then(resdata=>cookies.set('jwt', resdata.token));
-      return Navigate('/services');
+      ).then(res=>res.json())
+      .then(data=>setData(data));
+      
     };
     const hashPassword = (pass) => {
       const hash = CryptoJS.MD5(pass).toString();
@@ -79,10 +83,25 @@ const Googlelogin=()=>{
     const onFailure=(res)=>{
         console.log("Login Failed", res)
     }
-    
+    useEffect(()=>{
+      if(Data){
+        if(Data.status == 201){
+          // console.log(Data.status == 201);
+          props.setOpen();
+          cookies.set('jwt', Data.token);
+          localStorage.setItem("data",JSON.stringify(Data.data))
+          return Navigate('/');
+        }else{
+          setError(401);
+          // console.log(Data.status);
+        }
+      }
+        },[Data]);
     // const onLogout =()=>{
     //   console.log('Logout with success');
     // }
+
+    
     
     return <div>
       <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="justify-centerw-full h-full bg-[rgba(0,0,0,.65)] pt-[148px] pb-[110px] z-[999]">

@@ -28,7 +28,8 @@ const Login=(props)=>{
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPass] = useState('');
-    // const [Data, setData] = useState();
+    const [Error, setError] = useState();
+    const [Data, setData] = useState();
 
     const hashPassword = (pass) => {
       const hash = CryptoJS.MD5(pass).toString();
@@ -53,12 +54,7 @@ const Login=(props)=>{
             })
           }
         ).then(res=>res.json())
-<<<<<<< HEAD
-        .then(resdata=>cookies.set('jwt', resdata.token));
-        return Navigate('/');
-=======
-        .then((resdata)=>{cookies.set('jwt', resdata.token);console.log(resdata)});
->>>>>>> 82ff95a98832cbcd3e474ed0438aac57c4c1151a
+        .then(data=>setData(data));
       }
       const login = async ()=>{
         await fetch('http://localhost:8000/api/login', 
@@ -72,11 +68,23 @@ const Login=(props)=>{
             })
           }
         ).then(res=>res.json())
-        .then(resdata=>cookies.set('jwt', resdata.token));
-        return Navigate('/services');
+        .then(data=>setData(data));
         
       }
-    //   const cookieValue = cookies.get('jwt');
+      useEffect(()=>{
+        if(Data){
+            if(Data.status == 201){
+                dispatch({type:"data_login",data:Data.data})
+                console.log(Data)
+                closeModal();
+                cookies.set('jwt', Data.token);
+                localStorage.setItem("data",JSON.stringify(Data.data))
+                return Navigate('/');
+            }else{
+                setError(401);
+            }
+        }
+          },[Data]);
 
     return <div>
         <Modal isOpen={IsOpen} onRequestClose={closeModal} contentLabel="Pop-up Modal" className="w-full h-full bg-[rgba(0,0,0,.65)] pt-[148px] pb-[110px] z-[999]" >
@@ -116,7 +124,7 @@ const Login=(props)=>{
                 </div>
 
                 <div className="mt-2 grid space-y-4 flex justify-center items-center" >
-                    <Googlelogin />
+                    <Googlelogin setOpen={closeModal}/>
                     <div className="relative flex items-center space-x-4 justify-center font-semibold">
                         <Facebooklogin />    
                         <img src="/images/facebook.png" className="absolute left-9 w-5 mr-[100px]" alt="Facebook logo" />

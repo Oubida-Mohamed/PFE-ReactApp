@@ -34,15 +34,21 @@ function PageServices() {
 
   useEffect(()=>{
     if(id!=null){
-      setdatail_filter(data.filter((d)=>{return d.sub_categories_id==id}))
+     data.map((d)=>{if(d.services.length>0){
+      setdatail_filter(d.services.filter((d2)=>{return  d2.sub_categories_id==id}) )
+
+      }
+        
+
+    })
     }else if(search2!=null){
      if(search2!="undefined"){
         const servs=[]
-        data.filter((sd)=>{ 
-          if(sd.tags.indexOf(search2) >= 0) {
-            servs.push(sd) 
-           }
-        });
+        data.map((d)=>{if(d.services.length>0){
+          return d.services.filter((d2)=>{if(d2.tags.indexOf(search2)>=0){
+            return  servs.push(d2) 
+          }})
+        }})
         if(servs.length>0){
           setdatail_filter(servs)
         }
@@ -62,7 +68,10 @@ function PageServices() {
   const handleChange=(state)=>{
     setButtonChecked(state);
   }
-  console.log(datail_filter)
+  if(datail_filter.length>0){
+    console.log(datail_filter)
+  }
+
   return <>{datail_filter.length>0?<div>
     <Navbar afiche={false} detail_services={false}/>
   <div className="container mx-auto mt-[150px]">
